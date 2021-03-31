@@ -43,7 +43,7 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(ErrorResponse.builder()
                         .timestamp(new Date())
-                        .message("field Exceptions")
+                        .message("INVALID INPUT FIELDS")
                         .data(errors)
                         .build());
     }
