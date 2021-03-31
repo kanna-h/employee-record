@@ -1,8 +1,6 @@
 package com.findandreplace.employeerecord.models;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.*;
+import org.springframework.hateoas.RepresentationModel;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -15,7 +13,7 @@ import javax.validation.constraints.NotEmpty;
 @Table(name = "Employees")
 
 @SequenceGenerator(name="seq", initialValue=6, allocationSize=100)
-public class Employee {
+public class Employee extends RepresentationModel {
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq")
     @Column(name = "employee_id")
@@ -33,5 +31,4 @@ public class Employee {
     @Email(message = "Invalid email address")
     @Column(name = "email")
     private String email;
-
 }
