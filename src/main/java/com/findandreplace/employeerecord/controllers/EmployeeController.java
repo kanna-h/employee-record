@@ -1,5 +1,6 @@
 package com.findandreplace.employeerecord.controllers;
 import com.findandreplace.employeerecord.Repository.EmployeeRepository;
+import com.findandreplace.employeerecord.exceptions.ResourceNotFoundException;
 import com.findandreplace.employeerecord.models.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,10 +28,10 @@ public class EmployeeController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Employee> getEmployee(@PathVariable Long employeeId)
-            throws Exception{
+    public ResponseEntity<Employee> getEmployee(@PathVariable("id") Long employeeId)
+            throws ResourceNotFoundException{
         Employee employee = employeeRepository.findById(employeeId)
-                .orElseThrow(() -> new Exception("Employee not found for id: "+ employeeId));
+                .orElseThrow(() -> new ResourceNotFoundException("Employee not found for id: "+ employeeId));
         return ResponseEntity.status(HttpStatus.FOUND).body(employee);
     }
 
