@@ -16,13 +16,13 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping(value = "/api/employees",
-                produces = MediaType.APPLICATION_JSON_VALUE,
-                consumes = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/employees")
 public class EmployeeController {
 
     @Autowired
     EmployeeService employeeService;
+
+    private final MediaType mediaType = MediaType.APPLICATION_JSON;
 
     @GetMapping
     public ResponseEntity<?> getAllEmployees() throws ResourceNotFoundException {
