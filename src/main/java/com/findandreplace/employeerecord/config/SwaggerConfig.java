@@ -8,6 +8,8 @@ import org.springframework.hateoas.mediatype.collectionjson.CollectionJsonLinkDi
 import org.springframework.plugin.core.SimplePluginRegistry;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
@@ -30,9 +32,20 @@ public class SwaggerConfig {
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.any())
+                .apis(RequestHandlerSelectors.basePackage("com.findandreplace.employeerecord"))
                 .paths(PathSelectors.any())
-                .build();
+                .build()
+                .apiInfo(apiDetails());
     }
 
+    private ApiInfo apiDetails(){
+        return new ApiInfo(
+                "Employee Record Application",
+                "Demo for personal reference",
+                "1.0",
+                "Terms of service url",
+                new Contact("Mr. Lazy Programmer", "Application url", "lazy@programmer.com"),
+                "API or Application License",
+                "License Url");
+    }
 }
