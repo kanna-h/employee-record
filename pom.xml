@@ -69,13 +69,31 @@
 			<version>1.18.16</version>
 			<scope>provided</scope>
 		</dependency>
-<!--		<dependency>
+		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
-		</dependency>-->
+		</dependency>
 	</dependencies>
 
+	<profiles>
+		<profile>
+			<id>test-skip</id>
+			<properties>
+				<maven.test.skip>true</maven.test.skip>
+			</properties>
+			<build>
+				<finalName>employee-record-testsSkipped</finalName>
+			</build>
+		</profile>
+
+		<profile>
+			<id>dev</id>
+			<build>
+				<finalName>${project.artifactId}-dev</finalName>
+			</build>
+		</profile>
+	</profiles>
 	<build>
 		<plugins>
 			<plugin>
@@ -84,6 +102,7 @@
 				<version>2.4.4</version>
 			</plugin>
 		</plugins>
+		<finalName>employee-record-application</finalName>
 	</build>
 
 </project>
