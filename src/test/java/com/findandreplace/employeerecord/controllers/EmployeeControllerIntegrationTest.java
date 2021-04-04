@@ -1,6 +1,7 @@
 package com.findandreplace.employeerecord.controllers;
 
 import com.findandreplace.employeerecord.EmployeeRecordApplication;
+import com.findandreplace.employeerecord.models.Employee;
 import com.findandreplace.employeerecord.services.EmployeeService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,6 +21,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.Collections;
 
@@ -61,5 +63,13 @@ class EmployeeControllerIntegrationTest {
                 HttpMethod.GET, entity, String.class);
         System.out.println("*************" + response.getBody());
         assertNotNull(response.getBody());
+    }
+
+    @Test
+    void getEmployee(){
+        RestTemplate template = new RestTemplate();
+        ResponseEntity<String> response = template.getForEntity(getRootUrl()+"/api/employees/2", String.class);
+        assertEquals(302, response.getStatusCodeValue());
+
     }
 }
