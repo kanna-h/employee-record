@@ -12,10 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -71,5 +68,13 @@ class EmployeeControllerIntegrationTest {
         ResponseEntity<String> response = template.getForEntity(getRootUrl()+"/api/employees/2", String.class);
         assertEquals(302, response.getStatusCodeValue());
 
+    }
+
+    void test(){
+        HttpHeaders headers = new HttpHeaders();
+        HttpEntity entity = new HttpEntity(headers);
+        RestTemplate template = new RestTemplate();
+        ResponseEntity<Employee> res = template.exchange("", HttpMethod.GET, entity, Employee.class);
+        Employee e = template.postForObject("", entity, Employee.class);
     }
 }
